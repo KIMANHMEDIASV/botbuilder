@@ -3,7 +3,7 @@
 
 // @ts-check
 
-const { ActivityHandler, MessageFactory } = require('botbuilder');
+const { ActivityHandler, MessageFactory } = require('@microsoft/agents-hosting');
 
 class EchoBot extends ActivityHandler {
     constructor() {
@@ -20,7 +20,7 @@ class EchoBot extends ActivityHandler {
             const membersAdded = context.activity.membersAdded ?? [];
             const welcomeText = 'Hello and welcome!';
             for (let cnt = 0; cnt < membersAdded.length; ++cnt) {
-                if (membersAdded[cnt].id !== context.activity.recipient.id) {
+                if (membersAdded[cnt].id !== context.activity.recipient?.id) {
                     await context.sendActivity(MessageFactory.text(welcomeText, welcomeText));
                 }
             }
