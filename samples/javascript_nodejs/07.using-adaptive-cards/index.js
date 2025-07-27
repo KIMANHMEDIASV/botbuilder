@@ -14,13 +14,12 @@ const restify = require('restify');
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const {
-    CloudAdapter,
-    ConfigurationBotFrameworkAuthentication
-} = require('botbuilder');
+    CloudAdapter, loadAuthConfigFromEnv
+} = require('@microsoft/agents-hosting');
 
 const { AdaptiveCardsBot } = require('./bots/adaptiveCardsBot');
 
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+const botFrameworkAuthentication = loadAuthConfigFromEnv();
 
 // Create adapter. See https://aka.ms/about-bot-adapter to learn more about adapters.
 const adapter = new CloudAdapter(botFrameworkAuthentication);
@@ -62,5 +61,6 @@ server.listen(process.env.port || process.env.PORT || 3978, function() {
 // Listen for incoming requests.
 server.post('/api/messages', async (req, res) => {
     // Route received a request to adapter for processing
+    // @ts-ignore
     await adapter.process(req, res, (context) => bot.run(context));
 });

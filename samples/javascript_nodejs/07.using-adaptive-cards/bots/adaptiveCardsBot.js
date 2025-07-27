@@ -3,8 +3,8 @@
 
 // @ts-check
 
-const { ActivityHandler, CardFactory } = require('botbuilder');
-
+const { ActivityHandler, CardFactory } = require('@microsoft/agents-hosting');
+const { Activity } = require('@microsoft/agents-activity')
 // Import AdaptiveCard content.
 const FlightItineraryCard = require('../resources/FlightItineraryCard.json');
 const ImageGalleryCard = require('../resources/ImageGalleryCard.json');
@@ -29,7 +29,7 @@ class AdaptiveCardsBot extends ActivityHandler {
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded ?? [];
             for (let cnt = 0; cnt < membersAdded.length; cnt++) {
-                if (membersAdded[cnt].id !== context.activity.recipient.id) {
+                if (membersAdded[cnt].id !== context.activity.recipient?.id) {
                     await context.sendActivity(`Welcome to Adaptive Cards Bot  ${ membersAdded[cnt].name }. ${ WELCOME_TEXT }`);
                 }
             }
@@ -40,10 +40,11 @@ class AdaptiveCardsBot extends ActivityHandler {
 
         this.onMessage(async (context, next) => {
             const randomlySelectedCard = CARDS[Math.floor((Math.random() * CARDS.length - 1) + 1)];
-            await context.sendActivity({
+            await context.sendActivity(Activity.fromObject({
+                type: 'message',
                 text: 'Here is an Adaptive Card:',
                 attachments: [CardFactory.adaptiveCard(randomlySelectedCard)]
-            });
+            }));
 
             // By calling next() you ensure that the next BotHandler is run.
             await next();
