@@ -5,10 +5,12 @@
 
 // @ts-check
 
-const botbuilderCore = require('botbuilder-core');
-const { BotAdapter, TurnContext, ActivityTypes } = botbuilderCore;
+// const botbuilderCore = require('botbuilder-core');
+const { CloudAdapter, TurnContext } = require('@microsoft/agents-hosting');
+const { ActivityTypes, Activity } = require('@microsoft/agents-activity')
 const readline = require('readline');
-
+const { text } = require('stream/consumers');
+const BotAdapter = CloudAdapter;
 /**
  * Lets a user communicate with a bot from a console window.
  *
@@ -36,7 +38,7 @@ class ConsoleAdapter extends BotAdapter {
         this.reference = {
             channelId: 'console',
             user: { id: 'user', name: 'User1' },
-            bot: { id: 'bot', name: 'Bot' },
+            agent: { id: 'bot', name: 'Bot' },
             conversation: { id: 'convo1', name: '', isGroup: false },
             serviceUrl: '',
             ...reference
@@ -77,21 +79,17 @@ class ConsoleAdapter extends BotAdapter {
             output: process.stdout,
             terminal: false
         });
-        rl.on('line', line => {
+        rl.on('line', async line => {
             // Initialize activity
-            const activity = TurnContext.applyConversationReference(
-                {
-                    type: ActivityTypes.Message,
-                    id: (this.nextId++).toString(),
-                    timestamp: new Date(),
-                    text: line
-                },
-                this.reference,
+            const activity = Activity.fromObject({type: ActivityTypes.Message, text: line});
+        
+            activity.applyConversationReference(
+                this.reference, 
                 true
             );
             // Create context and run middleware pipe
             const context = new TurnContext(this, activity);
-            this.runMiddleware(context, logic).catch(err => {
+            await this.runMiddleware(context, logic).catch(err => {
                 this.printError(err.toString());
             });
         });
@@ -125,8 +123,8 @@ class ConsoleAdapter extends BotAdapter {
      */
     continueConversation(reference, logic) {
         // Create context and run middleware pipe
-        const activity = TurnContext.applyConversationReference(
-            {},
+        const activity = new Activity(ActivityTypes.Message);
+        activity.applyConversationReference(
             reference,
             true
         );
