@@ -7,9 +7,8 @@
 
 // const botbuilderCore = require('botbuilder-core');
 const { CloudAdapter, TurnContext } = require('@microsoft/agents-hosting');
-const { ActivityTypes, Activity } = require('@microsoft/agents-activity')
+const { ActivityTypes, Activity } = require('@microsoft/agents-activity');
 const readline = require('readline');
-const { text } = require('stream/consumers');
 const BotAdapter = CloudAdapter;
 /**
  * Lets a user communicate with a bot from a console window.
@@ -81,10 +80,10 @@ class ConsoleAdapter extends BotAdapter {
         });
         rl.on('line', async line => {
             // Initialize activity
-            const activity = Activity.fromObject({type: ActivityTypes.Message, text: line});
-        
+            const activity = Activity.fromObject({ type: ActivityTypes.Message, text: line });
+
             activity.applyConversationReference(
-                this.reference, 
+                this.reference,
                 true
             );
             // Create context and run middleware pipe
