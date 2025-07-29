@@ -4,7 +4,7 @@
 // @ts-check
 
 const Recognizers = require('@microsoft/recognizers-text-suite');
-const { ActivityHandler } = require('botbuilder');
+const { ActivityHandler } = require('@microsoft/agents-hosting');
 
 // The accessor names for the conversation flow and user profile state property accessors.
 const CONVERSATION_FLOW_PROPERTY = 'CONVERSATION_FLOW_PROPERTY';

@@ -18,8 +18,8 @@ const {
     ConversationState,
     MemoryStorage,
     UserState,
-    ConfigurationBotFrameworkAuthentication
-} = require('botbuilder');
+    loadAuthConfigFromEnv
+} = require('@microsoft/agents-hosting');
 
 // This bot's main dialog.
 const { CustomPromptBot } = require('./bots/customPromptBot');
@@ -34,7 +34,7 @@ server.listen(process.env.port || process.env.PORT || 3978, function() {
     console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
 });
 
-const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
+const botFrameworkAuthentication = loadAuthConfigFromEnv()
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about how bots work.
@@ -74,5 +74,6 @@ adapter.onTurnError = async (context, error) => {
 // Listen for incoming requests.
 server.post('/api/messages', async (req, res) => {
     // Route received a request to adapter for processing
+    // @ts-ignore
     await adapter.process(req, res, (context) => bot.run(context));
 });
