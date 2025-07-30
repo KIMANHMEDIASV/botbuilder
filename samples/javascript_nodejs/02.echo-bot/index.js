@@ -29,7 +29,7 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
     console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
 });
 
-const botFrameworkAuthentication = loadAuthConfigFromEnv()
+const botFrameworkAuthentication = loadAuthConfigFromEnv();
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about how bots work.
@@ -68,13 +68,3 @@ server.post('/api/messages', async (req, res) => {
     // @ts-ignore
     await adapter.process(req, res, (context) => myBot.run(context));
 });
-
-// // Listen for Upgrade requests for Streaming.
-// server.on('upgrade', async (req, socket, head) => {
-//     // Create an adapter scoped to this WebSocket connection to allow storing session data.
-//     const streamingAdapter = new CloudAdapter(botFrameworkAuthentication);
-//     // Set onTurnError for the CloudAdapter created for each connection.
-//     streamingAdapter.onTurnError = onTurnErrorHandler;
-
-//     await streamingAdapter.process(req, socket, head, (context) => myBot.run(context));
-// });

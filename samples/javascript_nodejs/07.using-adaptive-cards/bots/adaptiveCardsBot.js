@@ -4,7 +4,7 @@
 // @ts-check
 
 const { ActivityHandler, CardFactory } = require('@microsoft/agents-hosting');
-const { Activity } = require('@microsoft/agents-activity')
+const { Activity } = require('@microsoft/agents-activity');
 // Import AdaptiveCard content.
 const FlightItineraryCard = require('../resources/FlightItineraryCard.json');
 const ImageGalleryCard = require('../resources/ImageGalleryCard.json');

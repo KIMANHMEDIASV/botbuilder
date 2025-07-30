@@ -34,7 +34,7 @@ server.listen(process.env.port || process.env.PORT || 3978, function() {
     console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
 });
 
-const botFrameworkAuthentication = loadAuthConfigFromEnv()
+const botFrameworkAuthentication = loadAuthConfigFromEnv();
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about how bots work.
