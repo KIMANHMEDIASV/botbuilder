@@ -1,0 +1,14 @@
+[
+  {
+    "id": "planner",
+    "name": "Conversation Planner",
+    "description": "General-purpose assistant for structured task planning.",
+    "endpointUrl": "https://api.example.com/planner"
+  },
+  {
+    "id": "summarizer",
+    "name": "Summarizer",
+    "description": "Fast summarizer for long context windows.",
+    "endpointUrl": "https://api.example.com/summarizer"
+  }
+]

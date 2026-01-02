@@ -1,0 +1,16 @@
+{
+  "name": "ai-chat-admin",
+  "version": "1.0.0",
+  "description": "Simple AI chat frontend and backend for managing models.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "chat",
+    "ai",
+    "sample"
+  ],
+  "author": "",
+  "license": "MIT"
+}
