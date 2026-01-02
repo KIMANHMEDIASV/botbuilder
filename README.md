@@ -16,6 +16,10 @@ To use the samples, clone this GitHub repository using Git.
     cd BotBuilder-Samples
 ```
 
+## Deployment guides
+
+- [Deploy a Bot Framework Web Chat client to Azure](./docs/deploy-webchat-to-azure.md)
+
 ## Sample lists
 
 Samples are designed to illustrate functionality you'll need to implement to build great bots!
