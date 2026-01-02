@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Chat Admin</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>AI Chat Admin</h1>
+      <p>Manage your AI models and chat with them from one page.</p>
+    </header>
+
+    <main class="grid">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Models</h2>
+          <button id="refreshModels" class="ghost">Refresh</button>
+        </div>
+        <div class="model-list">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Endpoint</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="modelRows"></tbody>
+          </table>
+        </div>
+
+        <form id="modelForm" class="stack">
+          <h3 id="formTitle">Add new model</h3>
+          <input type="hidden" id="modelId" />
+          <label class="stack">
+            <span>Name</span>
+            <input id="modelName" type="text" required placeholder="Summarizer" />
+          </label>
+          <label class="stack">
+            <span>Description</span>
+            <input id="modelDescription" type="text" required placeholder="Short description" />
+          </label>
+          <label class="stack">
+            <span>Endpoint URL</span>
+            <input id="modelEndpoint" type="url" required placeholder="https://api.example.com/model" />
+          </label>
+          <div class="actions">
+            <button type="submit">Save</button>
+            <button type="button" id="cancelEdit" class="ghost">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel chat">
+        <div class="panel-header">
+          <h2>Chat</h2>
+          <div class="select">
+            <label for="chatModel">Model</label>
+            <select id="chatModel"></select>
+          </div>
+        </div>
+
+        <div id="transcript" class="transcript"></div>
+        <form id="chatForm" class="chat-form">
+          <input id="messageInput" type="text" placeholder="Type a message" required />
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <template id="modelRowTemplate">
+      <tr>
+        <td class="model-name"></td>
+        <td class="model-description"></td>
+        <td class="model-endpoint"></td>
+        <td class="actions">
+          <button type="button" class="ghost edit">Edit</button>
+          <button type="button" class="ghost danger delete">Delete</button>
+        </td>
+      </tr>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
