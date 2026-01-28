@@ -1,4 +1,14 @@
 # Node.js
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Subscription 1(371beacb-4b9a-4c09-9a23-f62664840484)'
+    appType: 'webAppLinux'
+    appName: 'mimimi'
+    deployToSlotOrASE: true
+    resourceGroupName: 'meomeo'
+    slotName: 'production'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    runtimeStack: 'NODE|22-lts'
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
